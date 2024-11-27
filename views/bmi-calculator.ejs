@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url('/images/Homee.png') no-repeat center center fixed;
+            background-size: cover;
+            text:white;
+        }
+
+        .navbar {
+            background-color: #3a3a3a; /* Grey navbar background */
+        }
+
+        .active {
+            border-bottom: 2px solid #00bcd4; /* Cyan underline for active link */
+        }
+
+        .container-custom {
+            width: 33.33%; /* One-third of the page width */
+            height: 500px; /* Height adjustment to 500px */
+            background-color: #181818; /* Darker grey/light black for container */
+            background-opacity: 80%;
+            margin: 100px auto; /* Center the container */
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-white min-h-screen bg-black">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-6 py-4 bg-[#2d2d2d]">
+        <div class="flex items-center">
+            <img src="/images/logo.png" alt="Logo" class="w-8 h-8 rounded-full">
+            <h1 class="ml-3 text-xl font-bold">Fit-track</h1>
+        </div>
+        <ul class="flex space-x-6">
+            <li><a href="/dashboard" class="text-gray-400 hover:text-white active" id="dashboard">Dashboard</a></li>
+            <li><a href="/workouts" class="text-gray-400 hover:text-white">Workouts</a></li>
+            <li><a href="/tutorials" class="text-gray-400 hover:text-white">Tutorials</a></li>
+            <li><a href="/blogs" class="text-gray-400 hover:text-white">Blogs</a></li>
+            <li><a href="/bmi-calculator" class="text-gray-400 hover:text-white">BMI Calculator</a></li>
+            <li><a href="/calorie" class="text-gray-400 hover:text-white">Calorie Calculator</a></li>
+        </ul>
+        <a href="/logout" class="text-red-400 hover:text-red-600">Logout</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container-custom rounded-lg shadow-lg">
+        <h1 class="text-white text-lg font-bold mb-6 text-center">BMI Calculator</h1>
+        <form action="/calculate-bmi" method="POST" class="space-y-6">
+            <div>
+                <label for="height" class="block text-white">Height (cm):</label>
+                <input type="number" id="height" name="height" required class="w-full p-3 rounded bg-[#555555] text-white">
+            </div>
+            <div>
+                <label for="weight" class="block text-white">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required class="w-full p-3 rounded bg-[#555555] text-white">
+            </div>
+            <button type="submit" class="bg-[#d1fa00] hover:bg-green-600 py-3 px-6 rounded text-lg text-black w-full">Calculate BMI</button>
+        </form>
+
+        <% if (typeof bmi !== 'undefined') { %>
+            <div class="mt-8 bg-gray-700 p-4 rounded-lg">
+                <h2 class="text-2xl font-semibold">Your BMI is: <span class="font-bold"><%= bmi %></span></h2>
+
+                <!-- BMI Feedback Scale -->
+                <div class="mt-6">
+                    <% let bmiCategory = ''; %>
+                    <% if (bmi < 18.5) { %>
+                        <div class="bg-yellow-500 p-4 rounded-lg text-center font-semibold">Underweight</div>
+                        <% bmiCategory = 'Underweight'; %>
+                    <% } else if (bmi >= 18.5 && bmi <= 24.9) { %>
+                        <div class="bg-green-500 p-4 rounded-lg text-center font-semibold">Normal Weight</div>
+                        <% bmiCategory = 'Normal'; %>
+                    <% } else if (bmi >= 25 && bmi <= 29.9) { %>
+                        <div class="bg-yellow-500 p-4 rounded-lg text-center font-semibold">Overweight</div>
+                        <% bmiCategory = 'Overweight'; %>
+                    <% } else { %>
+                        <div class="bg-red-500 p-4 rounded-lg text-center font-semibold">Obese</div>
+                        <% bmiCategory = 'Obese'; %>
+                    <% } %>
+                </div>
+
+                <!-- Detailed BMI Analysis -->
+                <p class="mt-4 text-center">You fall under the "<%= bmiCategory %>" category.</p>
+            </div>
+        <% } %>
+
+        <!-- Back to Home Button -->
+        <div class="mt-6 text-center">
+            <a href="/dashboard" class="text-white underline hover:text-blue-600">Go Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+
+</html>

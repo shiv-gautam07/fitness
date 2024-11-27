@@ -1,0 +1,184 @@
+/* General Body Styling */
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #000; /* Black background for a sleek look */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('/images/back.jpg') no-repeat center center fixed;
+    background-size: 100% 100%; /* Reduce the size of the background image */
+}
+
+/* Container Styling */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo Styling */
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* Content Section Styling */
+.content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px;
+}
+
+/* Image Styling */
+.image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 400px; /* Restrict image size */
+    border-radius: 10px;
+}
+
+/* Form Styling */
+form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Spread elements evenly */
+    align-items: center;
+    background-color: #1b1b1b; /* Slightly lighter black for the form background */
+    padding: 50px 30px; /* Add extra padding for spacing */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    text-align: center;
+    height: 500px; /* Adjust box height for better spacing */
+}
+
+/* Form Image Styling */
+.form-image {
+    height: 120px; /* Adjust height for better balance */
+    width: 120px; /* Match height for uniform shape */
+    margin-bottom: 20px; /* Space between image and inputs */
+    border-radius: 50%; /* Green border for style */
+    object-fit: cover; /* Ensure the image is cropped and fits well */
+}
+
+/* Input Fields */
+form input[type="text"],
+form input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #2b2b2b;
+    background: #2b2b2b;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus {
+    border-color: #00ff00; /* Highlighted border on focus */
+}
+
+/* Submit Button */
+form button {
+    width: 100%;
+    padding: 12px;
+    background:#d1fa00;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    margin-top: 20px; /* Increase spacing */
+}
+
+form button:hover {
+    background: #1b1b1b;
+    color: #d1fa00;
+    border: 2px solid #d1fa00;
+}
+
+/* Links */
+form a {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #d1fa00;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Message Styling */
+.message {
+    margin-bottom: 15px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%; /* Match form width */
+}
+
+.message.error {
+    background-color: #ff4c4c;
+    color: #fff;
+}
+
+.message.success {
+    background-color: #00ff00;
+    color: #000;
+}
+.signup {
+    font-size: 30px;
+    color:#d1fa00;
+    font-weight: 500;
+}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .image-container img {
+        max-width: 300px;
+    }
+
+    form {
+        height: auto; /* Adjust height for smaller screens */
+        padding: 40px 20px;
+    }
+
+    .form-image {
+        height: 100px; /* Smaller image for smaller screens */
+        width: 100px;
+    }
+}

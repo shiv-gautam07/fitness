@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body{
+            background-image: url(../images/dashboard.jpg);
+            background-size: cover; /* Ensures the image covers the entire area */
+            background-repeat: no-repeat; /* Prevents tiling of the image */
+            background-position: center center; /* Centers the image */
+            background-attachment: fixed; 
+        }
+        .active {
+            color: #d1fa00;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .active::after {
+            content: ''; 
+            position: absolute; 
+            bottom: -1px; 
+            left: 0; 
+            width: 100%; 
+            height: 1px; 
+            background-color: #d1fa00;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-6 py-4 bg-[#2d2d2d]">
+        <div class="flex items-center">
+            <img src="/images/logo.png" alt="Logo" class="w-8 h-8 rounded-full">
+            <h1 class="ml-3 text-xl font-bold">Fit-track</h1>
+        </div>
+        <ul class="flex space-x-6">
+            <li><a href="/dashboard" class="text-gray-400 hover:text-white active" id="dashboard">Dashboard</a></li>
+            <li><a href="/workouts" class="text-gray-400 hover:text-white">Workouts</a></li>
+            <li><a href="/tutorials" class="text-gray-400 hover:text-white">Tutorials</a></li>
+            <li><a href="/blogs" class="text-gray-400 hover:text-white">Blogs</a></li>
+            <li><a href="/bmi-calculator" class="text-gray-400 hover:text-white">BMI Calculator</a></li>
+            <li><a href="/calorie" class="text-gray-400 hover:text-white">Calorie Calculator</a></li>
+        </ul>
+        <a href="/logout" class="text-red-400 hover:text-red-600">Logout</a>
+    </nav>
+
+    <!-- Dashboard Grid -->
+    <div class="w-full h-[600px] max-w-7xl mx-auto grid grid-cols-4 gap-4 px-8 py-10">
+        <!-- Adjusted Left Sidebar -->
+        <div class="col-span-2 bg-[#333333] p-6 rounded-lg shadow" style="margin-left: -10px; width: calc(100% - 30px); height: calc(100%);">
+            <!-- Input Fields -->
+            <div class="flex flex-col space-y-4 mb-6">
+                <input type="date" id="workoutDate" class="bg-gray-600 text-white px-4 py-2 rounded-md">
+                <input type="number" id="runTime" placeholder="Time (min)" class="bg-gray-600 text-white px-4 py-2 rounded-md">
+                <input type="number" id="runDistance" placeholder="Distance (km)" class="bg-gray-600 text-white px-4 py-2 rounded-md">
+                <button id="addWorkout" class="bg-[#d1fa00] text-black px-4 py-2 rounded-md">Add Workout</button>
+            </div>
+            <!-- Chart -->
+            <div class="bg-[#444444] rounded-lg p-6 shadow">
+                <h2 class="text-white font-semibold mb-4">Running Schedule</h2>
+                <canvas id="runningChart" class="mt-4"></canvas>
+            </div>
+        </div>
+    
+        <!-- Adjusted Right Section -->
+        <div class="col-span-2  p-6 rounded-lg shadow" style="width: calc(100% - 30px); height: calc(100% - 50px);">
+            <h2 class="text-white text-4xl font-semibold mb-4">Welcome to Fit-track Dashboard</h2>
+            <!-- Add this section to dashboard.ejs where you want to display BMI -->
+<div class="col-span-2 bg-[#333333] p-6 rounded-lg shadow">
+    <h2 class="text-xl font-semibold mb-4">Your Latest BMI</h2>
+    <% if (userBMI) { %>
+        <p class="text-lg text-[#d1fa00]">BMI: <span class="font-bold"><%= userBMI %></span></p>
+    <% } else { %>
+        <p class="text-lg">No BMI data available. Please calculate your BMI <a href="/bmi-calculator" class="text-blue-500 underline">here</a>.</p>
+    <% } %>
+</div>
+<% if (calorieData) { %>
+    <div class="bg-[#333333] p-6 mt-6 rounded-lg">
+
+        <h2 class="text-xl font-semibold mb-4">Your Weekly Workout Plan</h2>
+        <ul class="space-y-3 list-disc pl-6">
+            <% const dailyCalories = (calorieData.calories / 7).toFixed(1); %>
+            <% const dailyTime = (dailyCalories / 10).toFixed(1); %> <!-- 10 cal/min -->
+            <% const dailyDistance = (dailyCalories / 60).toFixed(1); %> <!-- 60 cal/km -->
+            
+            <% const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']; %>
+            <% days.forEach(day => { %>
+                <li>
+                    <span class="font-bold text-[#d1fa00]"><%= day %>:</span>
+                    Run for <span class="font-bold"><%= dailyTime %> minutes</span>
+                    or cover <span class="font-bold"><%= dailyDistance %> kilometers</span>.
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+<% } else { %>
+    <p class="text-center text-gray-400 mt-6">No calorie data available for workout planning.</p>
+<% } %>
+
+</div>
+    </div>
+    <script>
+        const workoutDate = document.getElementById("workoutDate");
+        const runTime = document.getElementById("runTime");
+        const runDistance = document.getElementById("runDistance");
+        const addWorkout = document.getElementById("addWorkout");
+    
+        let chartData = {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Running Time (minutes)',
+                    data: [],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1,
+                    tension: 0.4,
+                },
+                {
+                    label: 'Distance (km)',
+                    data: [],
+                    backgroundColor: 'rgba(34, 197, 94, 0.5)',
+                    borderColor: 'rgba(34, 197, 94, 1)',
+                    borderWidth: 1,
+                    tension: 0.4,
+                }
+            ]
+        };
+    
+        const ctx = document.getElementById('runningChart').getContext('2d');
+        const runningChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#FFFFFF'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#FFFFFF'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#FFFFFF'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    }
+                }
+            }
+        });
+    
+        function updateChart() {
+            runningChart.update();
+        }
+    
+        function loadData() {
+            fetch('/api/get-workouts')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(workout => {
+                        chartData.labels.push(workout.date);
+                        chartData.datasets[0].data.push(workout.time);
+                        chartData.datasets[1].data.push(workout.distance);
+                    });
+                    updateChart();
+                })
+                .catch(error => console.error('Error loading workouts:', error));
+        }
+    
+        addWorkout.addEventListener('click', () => {
+            const date = workoutDate.value;
+            const time = runTime.value;
+            const distance = runDistance.value;
+    
+            if (date && time && distance) {
+                chartData.labels.unshift(date);
+                chartData.datasets[0].data.unshift(parseInt(time));
+                chartData.datasets[1].data.unshift(parseFloat(distance));
+    
+                if (chartData.labels.length > 7) {
+                    chartData.labels.pop();
+                    chartData.datasets[0].data.pop();
+                    chartData.datasets[1].data.pop();
+                }
+    
+                fetch('/api/save-workout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ date, time, distance })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Workout saved:', data);
+                        updateChart();
+                    })
+                    .catch(error => console.error('Error saving workout:', error));
+            }
+        });
+      // Function to fetch and display calorie data
+function fetchCalories() {
+    fetch('/api/get-calories')
+        .then(response => response.json())
+        .then(data => {
+            if (data.calories) {
+                const timeRequired = (data.calories / 10).toFixed(1);
+                const distanceRequired = (data.calories / 60).toFixed(1);
+                document.getElementById('calorie-info').innerHTML = `
+                    <h3>Your Recommended Daily Calories: <span class="text-[#d1fa00]">${data.calories}</span> calories</h3>
+                    <p>You need to run for <span class="font-bold text-[#d1fa00]">${timeRequired} minutes</span> or cover a distance of <span class="font-bold text-[#d1fa00]">${distanceRequired} kilometers</span> to burn these calories.</p>
+                `;
+            }
+        })
+        .catch(error => console.error('Error fetching calorie data:', error));
+}
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', fetchCalories);
+
+    
+        // Load pre-stored data on page load
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+    
+    
+</body>
+</html>

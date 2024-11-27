@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <img src="/images/logo.png" class="logoo">
+    
+    <div class="login-container">
+
+        <!-- Left Form Section -->
+        <div class="form-section">
+            <div class="login-form">
+                    <img src="/images/progress-image.jpg" alt="Profile Placeholder" class="form-image-container">
+                <h1 class="login-title">Login</h1>
+                <form action="/login" method="POST" class="form">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="login-button">Login</button>
+
+                    <% if (message) { %>
+                        <p class="error-message"><%= message %></p>
+                    <% } %>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <a href="/forgot-password" class="secondary-button">Forgot Password</a>
+                        <a href="/signup" class="secondary-button">Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Image Section -->
+        <div class="image-section">
+            <div class="image-overlay"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url(../images/result.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-6 py-4" style="background-color: #2d2d2d;">
+        <div class="flex items-center">
+            <img src="/images/logo.png" alt="Logo" class="w-8 h-8 rounded-full">
+            <h1 class="ml-3 text-xl font-bold">Fit-track</h1>
+        </div>
+        <ul class="flex space-x-6" id="navbar">
+            <li><a href="/dashboard" class="text-gray-400 hover:text-white" id="dashboard">Dashboard</a></li>
+            <li><a href="/workouts" class="text-gray-400 hover:text-white" id="workouts">Workouts</a></li>
+            <li><a href="/tutorials" class="text-gray-400 hover:text-white active" id="tutorials">Tutorials</a></li>
+            <li><a href="/blogs" class="text-gray-400 hover:text-white" id="blogs">Blogs</a></li>
+            <li><a href="/contact" class="text-gray-400 hover:text-white" id="contact">Contact</a></li>
+            <li><a href="/calorie" class="text-gray-400 hover:text-white" id="calorie">Calorie Calculator</a></li>
+        </ul>
+        <a href="/logout" class="text-red-400 hover:text-red-600">Logout</a>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto bg-[#1b1b1b] rounded-lg p-6 shadow-lg"> <!-- Changed to max-w-md and adjusted padding -->
+            <h1 class="text-2xl font-bold mb-4 text-center">Your Personalized Plan</h1> <!-- Reduced font size -->
+            
+            <div class="space-y-4"> <!-- Reduced space between elements -->
+                <!-- Calorie Result -->
+                <div class="bg-[#555555] rounded-lg p-4"> <!-- Reduced padding -->
+                    <h2 class="text-lg font-semibold mb-2">Daily Calorie Needs</h2> <!-- Reduced font size -->
+                    <p class="text-xl font-bold text-[#d1fa00]"><%= calories %> calories/day</p> <!-- Reduced font size -->
+                    <p class="text-gray-400 mt-2">to maintain your current weight</p>
+                </div>
+
+                <!-- Exercise Plan -->
+                <div class="bg-[#555555] rounded-lg p-4"> <!-- Reduced padding -->
+                    <h2 class="text-lg font-semibold mb-2">Exercise Plan</h2> <!-- Reduced font size -->
+                    <p class="text-gray-300"><%= exercisePlan %></p>
+                </div>
+
+                <!-- Nutrition Plan -->
+                <div class="bg-[#555555] rounded-lg p-4"> <!-- Reduced padding -->
+                    <h2 class="text-lg font-semibold mb-2">Nutrition Plan</h2> <!-- Reduced font size -->
+                    <p class="text-gray-300"><%= nutritionPlan %></p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-center space-x-4 mt-6"> <!-- Reduced margin-top -->
+                    <a href="/dashboard" 
+                        class="bg-[#d1fa00] hover:bg-[#d1fa00] text-white font-bold py-2 px-5 rounded transition duration-300"> <!-- Reduced padding -->
+                        Go to Dashboard
+                    </a>
+                    <a href="/calorie" 
+                        class="bg-[#555555] hover:bg-[#1b1b1b] text-white font-bold py-2 px-5 rounded transition duration-300"> <!-- Reduced padding -->
+                        Recalculate
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

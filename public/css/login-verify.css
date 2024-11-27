@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('/images/pollos.png'); /* Add your background image */
+    background-size: cover;
+}
+
+.container {
+    background-color: rgb(25, 25, 25);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    text-align: center;
+    transform: translateX(400px); /* Move the box 200px to the right */
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Make the logo circular */
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #d1fa00;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background: #363535;
+    color: #ccc;
+    resize: none; /* Prevent resizing */
+    height: 20px; /* Decreased height of the input field */
+}
+
+/* Default button style */
+button {
+    padding: 10px;
+    background: #d1fa00;  /* Yellow background */
+    color: #000;          /* Black text */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;         /* Remove border */
+    border-radius: 5px;   /* Optional: Adds rounded corners */
+    transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color */
+}
+
+/* Hover effect */
+button:hover {
+    background-color: #000;   /* Black background on hover */
+    color: #d1fa00;           /* Yellow text color on hover */
+}
+
+/* Additional message styling */
+#error {
+    color: rgb(237, 27, 27); /* Red for errors */
+}
+
+.warning {
+    color: rgb(255, 140, 0); /* Orange for warnings */
+}
+
+.success {
+    color: rgb(0, 128, 0); /* Green for success */
+}

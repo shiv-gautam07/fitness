@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <link rel="stylesheet" href="/css/verify-otp.css">
+    <style>
+        /* Optional: Add CSS styles for the error/success message */
+        .message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .error {
+            color: #721c24;
+        }
+        .success {
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        <!-- <div class="logo">
+            <img src="/images/logo.png" alt="Workout Logo" class="logo-image">
+        </div> -->
+
+        <!-- Content Section -->
+        <div class="content">
+            <!-- Workout Image -->
+            <!-- <div class="image-container">
+                <img src="/images/image2.jpg" alt="Workout Image" class="workout-image">
+            </div> -->
+
+            <!-- OTP Form Section -->
+            <form class="otp-form" action="/verify-otp" method="POST">
+                <!-- Rounded Image -->
+                <div class="form-image-container">
+                    <img src="/images/progress-image.jpg" alt="Rounded Logo" class="form-image">
+                </div>
+
+                <!-- Display the message if it exists -->
+                <% if (message) { %>
+                    <p id="message" class="message <%= typeof messageType !== 'undefined' && messageType === 'error' ? 'error' : 'success' %>">
+                        <%= message %>
+                    </p>
+                <% } %>
+                
+                <input type="text" name="otp" placeholder="Enter OTP" class="otp-input" required>
+                <button type="submit" class="otp-button">Verify OTP</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript to auto-hide the message after 5 seconds -->
+    <script>
+        // Check if there's a message to hide
+        window.onload = function() {
+            const messageElement = document.getElementById('message');
+            if (messageElement) {
+                setTimeout(function() {
+                    messageElement.style.display = 'none';
+                }, 5000); // 5000 milliseconds = 5 seconds
+            }
+        };
+    </script>
+</body>
+</html>

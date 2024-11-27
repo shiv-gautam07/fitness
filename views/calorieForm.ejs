@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url(../images/calorie.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-6 py-4" style="background-color: #2d2d2d;">
+        <div class="flex items-center">
+            <img src="/images/logo.png" alt="Logo" class="w-8 h-8 rounded-full">
+            <h1 class="ml-3 text-xl font-bold">Fit-track</h1>
+        </div>
+        <ul class="flex space-x-6" id="navbar">
+            <li><a href="/dashboard" class="text-gray-400 hover:text-white active" id="dashboard">Dashboard</a></li>
+            <li><a href="/workouts" class="text-gray-400 hover:text-white" id="workouts">Workouts</a></li>
+            <li><a href="/tutorials" class="text-gray-400 hover:text-white" id="tutorials">Tutorials</a></li>
+            <li><a href="/blogs" class="text-gray-400 hover:text-white" id="blogs">Blogs</a></li>
+            <li><a href="/bmi-calculator" class="text-gray-400 hover:text-white" id="bmi-calculator">BMI Calculator</a></li>
+            <li><a href="/calorie" class="text-gray-400 hover:text-white" id="calorie">Calorie Calculator</a></li>
+        </ul>
+        <a href="/logout" class="text-red-400 hover:text-red-600">Logout</a>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto bg-[#1b1b1b] rounded-lg p-6 shadow-lg">
+            <h1 class="text-2xl font-bold mb-6 text-center">Calorie Calculator</h1>
+            
+            <form action="/calorie/result" method="POST" class="space-y-4">
+                <div class="space-y-2">
+                    <input type="text" name="name" placeholder="Name" required
+                        class="w-full px-4 py-2 rounded bg-[#555555] border border-gray-600 focus:border-blue-500 focus:outline-none">
+                    
+                    <input type="number" name="age" placeholder="Age" required
+                        class="w-full px-4 py-2 rounded bg-[#555555] border border-gray-600 focus:border-blue-500 focus:outline-none">
+                    
+                    <select name="gender" required
+                        class="w-full px-4 py-2 rounded bg-[#555555] border border-gray-600 focus:border-blue-500 focus:outline-none">
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    
+                    <input type="number" name="weight" placeholder="Weight (kg)" required
+                        class="w-full px-4 py-2 rounded bg-[#555555] border border-gray-600 focus:border-blue-500 focus:outline-none">
+                    
+                    <input type="number" name="height" placeholder="Height (cm)" required
+                        class="w-full px-4 py-2 rounded bg-[#555555] border border-gray-600 focus:border-blue-500 focus:outline-none">
+                    
+                    <select name="activityLevel" required
+                        class="w-full px-4 py-2 rounded bg-[#555555] border border-gray-600 focus:border-blue-500 focus:outline-none">
+                        <option value="" disabled selected>Select Activity Level</option>
+                        <option value="sedentary">Sedentary</option>
+                        <option value="lightly_active">Lightly Active</option>
+                        <option value="moderately_active">Moderately Active</option>
+                        <option value="very_active">Very Active</option>
+                    </select>
+                </div>
+
+                <!-- Activity Level Explanation -->
+                <div class="mt-4 p-4 bg-[#555555] rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">Activity Level Guide:</h2>
+                    <ul class="list-disc list-inside text-sm text-gray-300">
+                        <li><strong>Sedentary:</strong> Little or no physical activity.</li>
+                        <li><strong>Lightly Active:</strong> Light exercise or sports 1–3 days per week.</li>
+                        <li><strong>Moderately Active:</strong> Moderate exercise or sports 3–5 days per week.</li>
+                        <li><strong>Very Active:</strong> Hard exercise or sports 6–7 days per week.</li>
+                    </ul>
+                </div>
+                
+                <button type="submit" 
+                    class="w-full bg-[#d1fa00] hover:bg-blue-700 text-black font-bold py-2 px-4 rounded transition duration-300">
+                    Calculate
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+/* General Body Styling */
+/* General Body Styling */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('/images/Testimonials.png') no-repeat center center fixed; /* Add your background image */
+    background-size: 1920px 1080px; /* Specify the width and height */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0 15px;
+    overflow: hidden;
+    background-size: 100% 100%; /* Prevent scrolling if image doesn't cover the viewport */
+}
+
+/* Container Styling */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Logo Styling - Positioned at Top Left */
+.logo {
+    position: absolute;
+    top: -70px; /* Moves logo to the top */
+    left: -160px; /* Moves logo to the left */
+    margin: 0;
+    z-index: 10; /* Ensures it stays above other content */
+}
+
+.logo-image {
+    width: 150px;
+    height: auto;
+}
+
+/* Content Section Styling */
+.content {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align vertically in the center */
+    justify-content: center;
+    width: 100%;
+    gap: 20px; /* Reduced gap for closer positioning */
+    margin-left: 680px;
+}
+
+/* Workout Image Styling */
+.image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.workout-image {
+    width: 100%;
+    max-width: 450px; /* Increased max-width for better visibility */
+    height: 550px; /* Set fixed height for image */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+
+}
+
+/* Form Section Styling */
+.otp-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(27, 27, 27, 0.9); /* Add transparency for better integration with the background */
+    padding: 50px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    max-width: 450px;
+    height: 450px; /* Set fixed height for form */
+    text-align: center;
+}
+
+/* Form Image (Rounded Logo) Styling */
+.form-image-container {
+    margin-bottom: 20px;
+}
+
+.form-image {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+    border: 4px solid #00ff00;
+}
+
+/* Input Fields */
+.otp-input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 2px solid #2b2b2b;
+    background: #2b2b2b;
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.otp-input:focus {
+    border-color: #00ff00;
+}
+
+/* Submit Button */
+.otp-button {
+    width: 100%;
+    padding: 15px;
+    background: #d1fa00;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    font-size: 18px;
+    margin-top: 25px;
+}
+
+.otp-button:hover {
+    background: #1b1b1b;
+    color: #d1fa00;
+    border: 2px solid #d1fa00;
+}
+
+/* Message Styling */
+.message {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.message.error {
+    color: #ff4c4c; /* Red for error */
+}
+
+.message.success {
+    color: #00ff00; /* Green for success */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .workout-image {
+        max-width: 350px; /* Slightly reduced size for mobile devices */
+    }
+
+    .otp-form {
+        max-width: 90%;
+        margin-top: 20px;
+        padding: 25px 20px;
+    }
+
+    .otp-input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .otp-button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
